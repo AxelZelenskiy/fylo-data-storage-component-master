@@ -1,68 +1,66 @@
-const webpack = require('webpack'),
-path = require('path'),
-MiniCSSExtractPlugin = require('mini-css-extract-plugin'),
-HTMLWebpackPlugin = require('html-webpack-plugin');
-// My default settings for very simple webpack 
+const 	path 					= require('path'),
+		webpack 				= require('webpack'),
+		HtmlWebpackPlugin 		= require('html-webpack-plugin'),
+		MiniCSSExtractPlugin	= require('mini-css-extract-plugin');
+
 module.exports = {
-	context : path.resolve(__dirname,'src'),
-	entry: { 
-		scripts :'./scripts.js'
+	mode 		: 'development',
+	devtool 	: 'eval',
+	context 	: path.resolve(__dirname,'src'),
+	entry		: './scripts.js',
+	output 		: {
+		filename 	: 'assets/js/scripts.js',
+		path		: path.resolve(__dirname,'design')
 	},
-	output: {
-		filename: 'result-[name].js',
-		path: path.resolve(__dirname,'dist')
-	},
-	resolve : {
-		extensions : ['.js','.css']
-	},
-	plugins : [
-	new HTMLWebpackPlugin({
-		hash: true,
-		template : './index.html',
-		minify : false
-	}),
-	new MiniCSSExtractPlugin({
-		filename : 'css/[name].[ContentHash].css',
-	}),
-	new webpack.HotModuleReplacementPlugin()
+	plugins 	: [
+				new HtmlWebpackPlugin({
+						hash : true,
+						template : './index.html' }),
+				new MiniCSSExtractPlugin({ filename : '[name].[contentHash].css'}),
+				new webpack.HotModuleReplacementPlugin()
 	],
-	module : {
-		rules : [
-		{
-			test: /\.html$/,
-			loader: 'html-loader',
-			options: {
-				minimize: false
-			}
-		},
-		{
-			test: /\.(svg|png|gif|jpeg|jpg|bmp)$/,
-			use: {
-				loader: "file-loader",
-				options: {
-					name: "[name].[hash].[ext]",
-					outputPath: 'imgs'
-				}
-			}
-		},
-		{
-			test: /\.scss$/,
-			use: [	{
-				loader: MiniCSSExtractPlugin.loader,
-							// options : {
-							// 	publicPath: '/dist/css/',
-							// }
+	module 		: {
+		rules		: [
+						{
+							test	: /\.html$/,
+							use : {
+								loader 	: 'html-loader',
+								options : {
+									minimize : false
+								}
+							}
 						},
-						'css-loader',
-						'sass-loader'
-						]
-					}
-					]
+						{
+							test: /\.(svg|png|jpeg|jpg|gif|png)$/,
+							use	: { 
+								loader: 'file-loader',
+								options:{
+										name		: '[name].[ext]' ,
+										outputPath	: 'assets/img'
+										}
+								}
+						},
+						{
+							test 	: /\.scss$/,
+							use		: [
+										{ 
+											loader: MiniCSSExtractPlugin.loader,
+											options: {
+              									publicPath: (resourcePath, context) => {
+                									return path.relative(path.dirname(resourcePath), context) + '/';
+              											},
+              										}
+										},
+										'css-loader',
+										'sass-loader'
+							]
+						}
+		]
 	},
-				devServer : {
-					port: 3000,
-					contentBase: path.resolve(__dirname,'src'),
-					watchContentBase: true,
-					hot: true,
-				}
+	devServer	: {
+			hot 				: true,
+			port 				: 3000,
+			contentBase 		: path.resolve(__dirname,'src'),
+			watchContentBase 	: true
+		}	
 };
