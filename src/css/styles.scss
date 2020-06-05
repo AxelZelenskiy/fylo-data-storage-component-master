@@ -15,21 +15,25 @@ body {
 	font-size: 14px;
     background-color: $VDB;
 }
-
+main, .inner-two-boxes {
+	display:flex;
+    align-items: center;
+}
 main {
 	min-height: 97vh;
     background: url("../images/bg-desktop.svg") no-repeat bottom left;	
     background-size: contain;
-    display:flex;
-    align-items: center;
     color: $PaleBlue;
-    .left-block,.right-block {
+    .inner-two-boxes {
     	margin: 0 auto;
     }
-    .left-block {
+    .left-block,.right-block {
     	background-color: $DB;
-    	border-radius: 15px 45% 15px 15px;
+    	flex-grow: 1;
     	padding: 40px;
+    }
+    .left-block {
+    	border-radius: 15px 45% 15px 15px;
     	.logo, .documents > img {
 			max-width: 100%;
 			max-height: 100%;
@@ -66,10 +70,11 @@ main {
     		  }
     }
     .right-block {
-    	background-color: $DB;
+    	margin-left: 20px;
+    	flex-grow: 2;
     	position: relative;
     	border-radius: 15px;
-    	padding: 40px;
+    	
     	h3 {
     		font-weight: 400;
     		span {
