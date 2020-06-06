@@ -1,10 +1,11 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
 }
-// Colors 
+
+// Colors
 $PaleBlue: hsl(243, 100%, 93%);
 $GrayishBlue: hsl(229, 7%, 55%);
 $DB: hsl(228, 56%, 26%);
@@ -12,138 +13,220 @@ $VDB: hsl(229, 57%, 11%);
 
 
 body {
-	font-size: 14px;
-    background-color: $VDB;
+  font-size: 14px;
+  background-color: $VDB;
 }
-main, .inner-two-boxes {
-	display:flex;
-    align-items: center;
-}
-main {
-	min-height: 97vh;
-    background: url("../images/bg-desktop.svg") no-repeat bottom left;	
-    background-size: contain;
-    color: $PaleBlue;
-    .inner-two-boxes {
-    	margin: 0 auto;
-    }
-    .left-block,.right-block {
-    	background-color: $DB;
-    	flex-grow: 1;
-    	padding: 40px;
-    }
-    .left-block {
-    	border-radius: 15px 45% 15px 15px;
-    	.logo, .documents > img {
-			max-width: 100%;
-			max-height: 100%;
 
-    	}
-    	.documents {
-    		margin-top: 30px;
-    		.action {
-    			background-color: $VDB;
-    			border-radius: 5px;
-    			float:left;
-    			margin-right: 15px;
-    			width: 50px;
-    			height: 50px;
-    			max-height: 100%;
-    			max-width: 100%;
-    			background-repeat: no-repeat;
-    			background-position: 50% 50%;
-    		}
-    		.doc {
-    			background-image: url('../images/icon-document.svg');
-    		}
-    		.folder {
-    			background-image: url('../images/icon-folder.svg');
-    		}
-    		.upload {
-    			background-image: url('../images/icon-upload.svg');
-    		}
-    		.action::after {
-    			content: "";
-    			clear: both;
-    			display: block;
-						}
-    		  }
+main, .inner-two-boxes {
+  display: flex;
+}
+
+main {
+	align-items: center;
+  min-height: 97vh;
+  z-index: 2;
+  position: relative;
+  color: $PaleBlue;	
+  .inner-two-boxes {
+  	align-items: baseline;
+    margin: 0 auto;
+    width: 900px;
+  }
+	.half-of-main {
+		position: absolute;
+		height: 50%;
+		width: 100%;
+		z-index: -1;
+		bottom:0;
+		background: url("../images/bg-desktop.svg") no-repeat bottom left;
+  		background-size: cover;
+	
+	}
+  .left-block, .right-block {
+    background-color: $DB;
+    padding: 40px;
+  }
+
+  .left-block {
+    border-radius: 15px 45% 15px 15px;
+
+    .logo, .documents > img {
+      max-width: 100%;
+      max-height: 100%;
+
     }
-    .right-block {
-    	margin-left: 20px;
-    	flex-grow: 2;
-    	position: relative;
-    	border-radius: 15px;
-    	
-    	h3 {
-    		font-weight: 400;
-    		span {
-    			font-weight: 700;
-    		}
+
+    .documents {
+      margin-top: 30px;
+
+      .action {
+        background-color: $VDB;
+        border-radius: 5px;
+        float: left;
+        margin-right: 15px;
+        width: 50px;
+        height: 50px;
+        max-height: 100%;
+        max-width: 100%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+      }
+
+      .doc {
+        background-image: url('../images/icon-document.svg');
+      }
+
+      .folder {
+        background-image: url('../images/icon-folder.svg');
+      }
+
+      .upload {
+        background-image: url('../images/icon-upload.svg');
+      }
+
+      .action::after {
+        content: "";
+        clear: both;
+        display: block;
+      }
+    }
+  }
+
+  .right-block {
+    margin-left: 20px;
+    flex-grow: 1;
+    position: relative;
+    align-self: flex-end;
+    border-radius: 15px;
+
+    h3 {
+      font-weight: 400;
+
+      span {
+        font-weight: 700;
+      }
+    }
+
+    .progress-bar {
+      background-color: $VDB;
+      width: 100%;
+      height: 20px;
+      border-radius: 10px;
+      position: relative;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 85%;
+      color: green;
+      height: 16px;
+      border-radius: 8px;
+      top: 2px;
+      left: 2px;
+      z-index: 2;
+      background: linear-gradient(90deg, hsl(6, 100%, 80%), hsl(335, 100%, 65%));
+    }
+
+    .progress-bar::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 4px;
+      right: 15.5%;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      z-index: 3;
+      background-color: #fff;
+    }
+    .progress-bar-scale {
+    	font-weight: 700;
+    	.progress-start {
+    		float:left;
+    		width: 50%;
     	}
-    	.progress-bar {
-    		background-color: $VDB;
-    		width: 100%;
-    		height: 20px;
-    		border-radius: 10px;
-			position: relative;
-			margin-top: 15px;
-			margin-bottom: 10px;
-    	}
-    	.progress-bar::after {
-    		content: '';
-    		display: block;
-    		position: absolute;
-    		width: 85%;
-    		color:green;
-    		height: 16px;
-    		border-radius: 8px;
-    		top: 2px;
-    		left: 2px;
-    		z-index: 2;
-    		background: linear-gradient(90deg, hsl(6, 100%, 80%), hsl(335, 100%, 65%));
-    	}
-    	.progress-bar::before {
-    		content: '';
-    		display: block;
-    		position: absolute;
-    		top:4px;
-    		right: 15.5%;
-    		border-radius: 50%;
-    		width: 12px;
-    		height: 12px;
-    		z-index: 3;
-    		background-color: #fff;
-    	}
-    	.abs-left {
-    		position: absolute;
-    		background-color: $PaleBlue;
-    		border-radius: 5px 5px 0 5px;
-    		top: -45px;
-    		right: 45px;
-    		padding: 25px 25px 15px 25px;
-    		h2 {
-    			color: #000;
-				line-height: 30px;
-				font-size: 30px;
-				.size-left {
-					font-size: 30px;
-				}
-				.text-left {
-					opacity: .7;
-					font-size: 20px;
-				}
-    		}
-    	}
-    	.abs-left::after {
-    			content: '';
-    			display: block;
-    			position: absolute;
-    			bottom: -20px;
-    			right: 0;
-    			border: 10px solid transparent;
-    			border-top: 10px solid $PaleBlue;
-    			border-right: 10px solid $PaleBlue;
+    	.progress-end {
+    		float:right;
+    		text-align: right;
+    		width: 50%;
     	}
     }
+    .progress-bar-scale::after {
+    	content: '';
+    	display: block;
+    	clear: both;
+    }
+
+    .abs-right {
+      position: absolute;
+      background-color: $PaleBlue;
+      border-radius: 5px 5px 0 5px;
+      top: -45px;
+      right: 45px;
+      padding: 25px 25px 15px 25px;
+
+      h2 {
+        color: #000;
+        line-height: 30px;
+        font-size: 30px;
+
+        .size-right {
+          font-size: 30px;
+        }
+
+        .text-right {
+          opacity: .7;
+          font-size: 20px;
+        }
+      }
+    }
+
+    .abs-right::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: -20px;
+      right: 0;
+      border: 10px solid transparent;
+      border-top: 10px solid $PaleBlue;
+      border-right: 10px solid $PaleBlue;
+    }
+  }
+}
+@media only screen and (max-width: 950px) {
+	main > .inner-two-boxes {
+		max-width: 760px;
+	}
+}
+@media only screen and (max-width: 440px) {
+	main > .half-of-main {
+		background-image: url('../images/bg-mobile.svg');
+		height: 100%;
+	}
+	main > .inner-two-boxes {
+		flex-direction: column;
+		.left-block, .right-block {
+			flex-grow: 1;
+			margin: 10px auto;
+			width: 80%;
+		}
+		.right-block {
+			.abs-right {
+				top: auto;
+				right: auto;
+				bottom: -45px;
+				left: 50%;
+				transform: translateX(-50%);
+				border-bottom-right-radius: 5px;
+				width: 65%;
+			}
+			.abs-right::after {
+				display: none;
+			}
+		}
+	}
 }
